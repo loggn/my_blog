@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "https://loggn.github.io/loggn/"
+baseurl = "https://loggn.vercel.app/"
 languageCode = "en-us"
 title = "Hugo Theme Stack Starter"
 
