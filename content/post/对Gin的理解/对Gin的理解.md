@@ -307,6 +307,23 @@ func main() {
 }
 ```
 
+## 记录：建立一个 server 流程
+
+1. 构建目录结构，并创建 main.go 文件
+2. 在根目录中生成 mod 文件
+
+```
+go mod init golangTestServer
+```
+
+3. 添加 Gin 框架作为依赖模块："github.com/gin-gonic/gin"
+
+```
+go get -u github.com/gin-gonic/gin
+```
+
+4. 在 main.go 文件中构建 Gin 应用的基础框架
+
 ## 补充知识
 
 ### `c *gin.Context`的方法
