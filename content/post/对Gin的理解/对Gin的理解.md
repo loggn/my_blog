@@ -321,8 +321,20 @@ go mod init golangTestServer
 ```
 go get -u github.com/gin-gonic/gin
 ```
-
-4. 在 main.go 文件中构建 Gin 应用的基础框架
+4. 将Gin框架依赖添加进放依赖内容的目录中，我这里是添加到vendor目录中
+ps：如果使用`go build`的方式直接构建项目就不用这一步，因为构建时会自动添加依赖到目录中，我是因为使用`go run`的方式，发现需要加这一步
+```
+go mod vendor
+```
+5. 在 main.go 文件中构建 Gin 应用的基础框架
+6. 配置`air`工具实现热重载
+   * 安装:`go install github.com/air-verse/air@latest`
+   * 运行：进入项目所在目录直接执行`air`即可
+7. 添加 Gorm 及其数据库驱动
+```
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/sqlite
+```
 
 ## 补充知识
 
