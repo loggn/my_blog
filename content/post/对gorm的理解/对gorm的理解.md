@@ -10,14 +10,23 @@ categories:
 ---
 
 # 对gorm的理解
-## Gorm简介
+## Gorm简介:以下内容来自[GORM指南](https://gorm.io/zh_CN/docs/index.html)
 Gorm 是 Go 语言中常用的 ORM（对象关系映射）框架，帮助开发者以面向对象的方式操作数据库，简化了 SQL 语句的编写。
 ### 特点：
-* 自动迁移：Gorm 可以根据结构体自动创建、更新数据库表，支持自动迁移（Auto Migration）。这使得表结构的维护更加简单。
-* 丰富的查询功能：支持链式操作，查询语句直观易懂，支持条件查询、关联查询、批量查询等复杂操作。
-* 事务支持：Gorm 提供了对事务的支持，允许开发者通过 DB.Transaction() 方法简便地执行事务操作，确保数据一致性。
-* 钩子函数：支持生命周期钩子函数（如 BeforeCreate、AfterCreate 等），在数据操作前后执行特定逻辑，方便实现一些业务逻辑。
-* 多数据库支持：Gorm 支持常见的关系型数据库如 MySQL、PostgreSQL、SQLite 等，跨数据库切换较为方便。
+* 全功能 ORM
+* 关联 (Has One，Has Many，Belongs To，Many To Many，多态，单表继承)
+* Create，Save，Update，Delete，Find 中钩子方法
+* 支持 Preload、Joins 的预加载
+* 事务，嵌套事务，Save Point，Rollback To Saved Point
+* Context、预编译模式、DryRun 模式
+* 批量插入，FindInBatches，Find/Create with Map，使用 SQL 表达式、Context Valuer 进行 CRUD
+* SQL 构建器，Upsert，数据库锁，Optimizer/Index/Comment Hint，命名参数，子查询
+* 复合主键，索引，约束
+* Auto Migration
+* 自定义 Logger
+* 灵活的可扩展插件 API：Database Resolver（多数据库，读写分离）、Prometheus…
+* 每个特性都经过了测试的重重考验
+开发者友好
 ### 核心功能：
 * 模型定义：通过定义结构体，Gorm 可以将 Go 的结构体映射为数据库中的表，如字段类型、约束等都可以通过结构体的标签（Tag）定义。
 * 查询操作：支持常见的查询操作，如 First() 查找第一条记录、Find() 查找多条记录，还可以通过 Where() 方法实现条件查询。
@@ -29,4 +38,59 @@ Gorm 是 Go 语言中常用的 ORM（对象关系映射）框架，帮助开发�
 * Gorm 适用于 Go 项目中与数据库交互频繁的场景，特别是需要简化数据库操作并保证代码可读性的项目。
 * 由于 Gorm 提供了丰富的 ORM 功能，适合用在需要与多个表进行复杂交互的项目中，比如电商平台、企业级管理系统等。
 
-## 常用的命令语句
+## 我对GORM的使用
+1. 安装
+```
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/sqlite
+```
+2. 文件中导入要使用的包(ps:这里以sqlite为例)
+```
+import (
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+)
+```
+3. 打开数据库连接
+```
+DB, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+if err != nil {
+	fmt.Println("连接数据库失败：", err)
+	return
+}
+```
+4. 迁移
+```
+DB.AutoMigrate(&StudentNew{})
+``` 
+5. 对数据库的操作：
+  * 查询
+```
+if err := DB.Where("studentID = ?", studentID).First(&student).Error; err != nil {
+	fmt.Println("查询学生ID失败:", err)
+	return false
+}
+```
+  * 插入
+```
+result := DB.Create(&student)
+```
+  * 删除
+```
+if err := utils.DB.Where("ksh = ?", id).Delete(&stu).Error; err != nil {
+	ctx.JSON(500, gin.H{
+		"error": "Failed to delete record",
+	})
+	return
+}
+```
+  * 修改
+```
+if err := utils.DB.Model(&user).Where("ksh = ?", id).Updates(stu).Error; err != nil {
+	c.JSON(500, gin.H{
+		"error": "Failed to update record",
+	})
+	return
+}
+```
+#### 未完待续
