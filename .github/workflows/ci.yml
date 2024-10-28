@@ -13,14 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Build
-      run: hugo --baseURL http://60.204.240.235 -d public
-
     - name: Deploy
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 在 GitHub Secrets 中存储 SSH 密钥
       run: |
         echo "$SSH_PRIVATE_KEY" > private_key
         chmod 600 private_key
-        scp -i private_key -r public/* root@60.204.240.235:/root/server/loggn
-
+        ssh -i private_key root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
