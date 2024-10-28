@@ -12,6 +12,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Add SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
+
 
     - name: Deploy
       env:
