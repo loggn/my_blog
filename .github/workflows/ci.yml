@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master  # 监视主分支的推送
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Hugo
+      run: |
+        wget https://github.com/gohugoio/hugo/releases/latest/download/hugo_linux_amd64.tar.gz
+        tar -xzf hugo_linux_amd64.tar.gz
+        sudo mv hugo /usr/local/bin/
+
+    - name: Build
+      run: hugo --baseURL http://60.204.240.235 -d public
+
+    - name: Deploy
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 在 GitHub Secrets 中存储 SSH 密钥
+      run: |
+        echo "$SSH_PRIVATE_KEY" > private_key
+        chmod 600 private_key
+        scp -i private_key -r public/* root@60.204.240.235:/root/server/loggn
+
