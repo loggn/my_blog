@@ -13,13 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-
-    - name: Set up Hugo
-      run: |
-        wget https://github.com/gohugoio/hugo/releases/latest/download/hugo_linux_amd64.tar.gz
-        tar -xzf hugo_linux_amd64.tar.gz
-        sudo mv hugo /usr/local/bin/
-
     - name: Build
       run: hugo --baseURL http://60.204.240.235 -d public
 
