@@ -22,3 +22,4 @@ jobs:
         ssh -v -i private_key root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
 
 
+
