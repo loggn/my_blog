@@ -20,4 +20,3 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > private_key
         chmod 600 private_key
         ssh -i private_key root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
-
