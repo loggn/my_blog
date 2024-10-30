@@ -31,6 +31,7 @@ jobs:
 
     - name: Deploy
       run: |
+        ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
         ssh -T root@60.204.240.235
         export PATH="/usr/local/go/bin:$PATH"
         cd /root/server/loggn && hugo --baseURL http://60.204.240.235
