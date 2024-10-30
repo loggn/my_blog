@@ -25,5 +25,7 @@ jobs:
       run: |
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
         ssh -T root@60.204.240.235
-        export PATH="/usr/local/bin:/usr/local/go/bin:$PATH"
-        sudo bash -c cd /root/server/loggn && hugo --baseURL http://60.204.240.235
+        cd ~
+        source .bashrc
+        cd /root/server/loggn
+        hugo --baseURL http://60.204.240.235
