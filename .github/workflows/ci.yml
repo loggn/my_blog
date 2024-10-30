@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master  # 监视主分支的推送
+      - master
 
 jobs:
   build:
@@ -11,22 +11,17 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+    - name: Debug SSH Private Key
+      run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c
 
-    - name: Set up Hugo
+
+    - name: Set up SSH agent
       run: |
-        wget https://github.com/gohugoio/hugo/releases/latest/download/hugo_linux_amd64.tar.gz
-        tar -xzf hugo_linux_amd64.tar.gz
-        sudo mv hugo /usr/local/bin/
-
-    - name: Build
-      run: hugo --baseURL http://60.204.240.235 -d public
+        eval $(ssh-agent -s)
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
+        ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
 
     - name: Deploy
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 在 GitHub Secrets 中存储 SSH 密钥
       run: |
-        echo "$SSH_PRIVATE_KEY" > private_key
-        chmod 600 private_key
-        scp -i private_key -r public/* root@60.204.240.235:/root/server/loggn
-
+        ssh -v root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
