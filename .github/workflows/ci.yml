@@ -26,7 +26,7 @@ jobs:
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
         ssh -T root@60.204.240.235
         sudo su
-        source .bashrc
+        export PATH=$PATH:/usr/local/go/bin
         cd ./server/loggn
         git pull
         hugo --baseURL http://60.204.240.235
