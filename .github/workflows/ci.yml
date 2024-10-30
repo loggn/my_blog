@@ -23,3 +23,4 @@ jobs:
     - name: Deploy
       run: |
         ssh -v -i ~/.ssh/id_rsa root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
+
