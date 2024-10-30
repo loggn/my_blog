@@ -15,6 +15,7 @@ jobs:
 
     - name: Set up SSH
       run: |
+        set -x  # 开启调试模式，显示每个命令的执行
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
@@ -22,4 +23,5 @@ jobs:
 
     - name: Deploy
       run: |
+        set -x  # 开启调试模式
         ssh -v -i ~/.ssh/id_rsa root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
