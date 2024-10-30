@@ -27,5 +27,6 @@ jobs:
         ssh -T root@60.204.240.235
         cd ~
         source .bashrc
-        cd /root/server/loggn
+        cd /website/loggn
+        git pull
         hugo --baseURL http://60.204.240.235
