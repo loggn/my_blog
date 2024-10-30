@@ -1,30 +1,50 @@
+# name: CI
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v4
+
+#     - name: Merge master into current branch
+#       run: |
+#         cd /root/server/loggn
+#         git pull origin/master
+
+#     - name: Set up SSH agent
+#       run: |
+#         eval $(ssh-agent -s)
+#         echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
+#         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
+
+#     - name: Deploy
+#       run: |
+#         ssh -v root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
 name: CI
-
-on:
-  push:
-    branches:
-      - master
-
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
 jobs:
-  build:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
 
-    - name: Merge master into current branch
-      run: |
-        cd /root/server/loggn
-        git pull origin/master
-
-    - name: Set up SSH agent
-      run: |
-        eval $(ssh-agent -s)
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
-        ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
-
-    - name: Deploy
-      run: |
-        ssh -v root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
 
