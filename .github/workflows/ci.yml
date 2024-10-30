@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master  # 监视主分支的推送
+      - master
 
 jobs:
   build:
@@ -12,16 +12,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Debug SSH Private Key
+      run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c
 
-    - name: Set up SSH
+
+    - name: Set up SSH agent
       run: |
-        set -x  # 开启调试模式，显示每个命令的执行
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        eval $(ssh-agent -s)
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
 
     - name: Deploy
       run: |
-        set -x  # 开启调试模式
-        ssh -v -i ~/.ssh/id_rsa root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
+        ssh -v root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
