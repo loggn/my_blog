@@ -24,7 +24,7 @@ jobs:
     - name: Deploy
       run: |
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
-        ssh -T root@60.204.240.235
+        ssh root@60.204.240.235
         cd ~
         source .bashrc
         cd /website/loggn
