@@ -13,20 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.23.2' # 你可以根据需要更改 Go 的版本
-
     - name: Set up SSH key
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Add Go to PATH
-      run: |
-        echo "/usr/local/go/bin" >> $GITHUB_PATH
-        echo "/usr/local/bin" >> $GITHUB_PATH
 
     - name: Display Go version
       run: go version
@@ -36,4 +26,5 @@ jobs:
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
         ssh -T root@60.204.240.235
         export PATH="/usr/local/go/bin:$PATH"
+        export PATH="/usr/local/bin:$PATH"
         sudo bash -c cd /root/server/loggn && hugo --baseURL http://60.204.240.235
