@@ -27,6 +27,6 @@ jobs:
         ssh -T root@60.204.240.235
         sudo su
         export PATH=$PATH:/usr/local/go/bin
-        cd ./server/loggn
+        cd /root/server/loggn
         git pull
         hugo --baseURL http://60.204.240.235
