@@ -13,19 +13,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version: '1.23.2' # 你可以根据需要更改 Go 的版本
 
+    - name: Set up SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Display Go version
+      run: go version
 
     - name: Deploy
       run: |
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
-        # ssh -T root@60.204.240.235 << 'EOF'
         ssh -T root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
