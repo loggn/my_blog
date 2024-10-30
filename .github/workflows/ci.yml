@@ -12,9 +12,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Debug SSH Private Key
-      run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c
 
+    - name: Merge master into current branch
+      run: |
+        git checkout your-branch  # 替换为你的工作分支
+        git merge origin/master
 
     - name: Set up SSH agent
       run: |
@@ -25,3 +27,4 @@ jobs:
     - name: Deploy
       run: |
         ssh -v root@60.204.240.235 'cd /root/server/loggn && hugo --baseURL http://60.204.240.235'
+
