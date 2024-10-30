@@ -18,6 +18,12 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.23.2' # 你可以根据需要更改 Go 的版本
+
+
     - name: Deploy
       run: |
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
