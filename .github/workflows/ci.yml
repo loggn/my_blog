@@ -24,11 +24,12 @@ jobs:
     - name: Deploy
       run: |
         ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
-        ssh -T root@60.204.240.235
-        sudo su
-        export PATH=$PATH:/usr/local/go/bin
-        ls
-        pwd
-        whoami
-        git pull
-        hugo --baseURL http://60.204.240.235
+        ssh -T root@60.204.240.235 << 'EOF'
+          sudo su
+          export PATH=$PATH:/usr/local/go/bin
+          ls
+          pwd
+          whoami
+          git pull
+          hugo --baseURL http://60.204.240.235
+        EOF
