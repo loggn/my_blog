@@ -19,4 +19,4 @@ jobs:
       run: |
         echo "$SSH_PRIVATE_KEY" > private_key
         chmod 600 private_key
-        ssh -i private_key root@60.204.240.235
+        ssh -T -i private_key root@60.204.240.235
