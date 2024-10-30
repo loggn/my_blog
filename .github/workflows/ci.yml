@@ -15,8 +15,8 @@ jobs:
 
     - name: Merge master into current branch
       run: |
-        git checkout your-branch  # 替换为你的工作分支
-        git merge origin/master
+        cd /root/server/loggn
+        git pull origin/master
 
     - name: Set up SSH agent
       run: |
