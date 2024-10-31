@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gorm on 刘龙龙</title><link>https://loggn.vercel.app/categories/gorm/</link><description>Recent content in Gorm on 刘龙龙</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 16 Oct 2024 22:01:54 +0800</lastBuildDate><atom:link href="https://loggn.vercel.app/categories/gorm/index.xml" rel="self" type="application/rss+xml"/><item><title>对gorm的理解</title><link>https://loggn.vercel.app/p/%E5%AF%B9gorm%E7%9A%84%E7%90%86%E8%A7%A3/</link><pubDate>Wed, 16 Oct 2024 22:01:54 +0800</pubDate><guid>https://loggn.vercel.app/p/%E5%AF%B9gorm%E7%9A%84%E7%90%86%E8%A7%A3/</guid><description>&lt;img src="https://ucarecdn.com/9aa429b5-25e4-432f-a9f6-899820700e41/" alt="Featured image of post 对gorm的理解" />&lt;h1 id="对gorm的理解">对gorm的理解
+&lt;/h1>&lt;h2 id="gorm简介以下内容来自gorm指南httpsgormiozh_cndocsindexhtml">Gorm简介:以下内容来自&lt;a class="link" href="https://gorm.io/zh_CN/docs/index.html" target="_blank" rel="noopener"
+>GORM指南&lt;/a>
+&lt;/h2>&lt;p>Gorm 是 Go 语言中常用的 ORM（对象关系映射）框架，帮助开发者以面向对象的方式操作数据库，简化了 SQL 语句的编写。&lt;/p>
+&lt;h3 id="特点">特点：
+&lt;/h3>&lt;ul>
+&lt;li>全功能 ORM&lt;/li>
+&lt;li>关联 (Has One，Has Many，Belongs To，Many To Many，多态，单表继承)&lt;/li>
+&lt;li>Create，Save，Update，Delete，Find 中钩子方法&lt;/li>
+&lt;li>支持 Preload、Joins 的预加载&lt;/li>
+&lt;li>事务，嵌套事务，Save Point，Rollback To Saved Point&lt;/li>
+&lt;li>Context、预编译模式、DryRun 模式&lt;/li>
+&lt;li>批量插入，FindInBatches，Find/Create with Map，使用 SQL 表达式、Context Valuer 进行 CRUD&lt;/li>
+&lt;li>SQL 构建器，Upsert，数据库锁，Optimizer/Index/Comment Hint，命名参数，子查询&lt;/li>
+&lt;li>复合主键，索引，约束&lt;/li>
+&lt;li>Auto Migration&lt;/li>
+&lt;li>自定义 Logger&lt;/li>
+&lt;li>灵活的可扩展插件 API：Database Resolver（多数据库，读写分离）、Prometheus…&lt;/li>
+&lt;li>每个特性都经过了测试的重重考验
+开发者友好&lt;/li>
+&lt;/ul>
+&lt;h3 id="核心功能">核心功能：
+&lt;/h3>&lt;ul>
+&lt;li>模型定义：通过定义结构体，Gorm 可以将 Go 的结构体映射为数据库中的表，如字段类型、约束等都可以通过结构体的标签（Tag）定义。&lt;/li>
+&lt;li>查询操作：支持常见的查询操作，如 First() 查找第一条记录、Find() 查找多条记录，还可以通过 Where() 方法实现条件查询。&lt;/li>
+&lt;li>关联查询：Gorm 支持模型之间的一对一、一对多、多对多等关联关系，提供了 Preload() 和 Joins() 等方法实现关联数据的查询。&lt;/li>
+&lt;li>创建、更新、删除：Gorm 提供了简便的创建、更新和删除数据的方法，如 Create() 创建记录，Save() 保存或更新记录，Delete() 删除记录。&lt;/li>
+&lt;/ul>
+&lt;h3 id="事务管理">事务管理：
+&lt;/h3>&lt;p>支持通过 Transaction() 方法进行事务管理，开发者可以在同一个事务中执行多个数据库操作，确保数据的一致性。&lt;/p>
+&lt;h3 id="适用场景">适用场景：
+&lt;/h3>&lt;ul>
+&lt;li>Gorm 适用于 Go 项目中与数据库交互频繁的场景，特别是需要简化数据库操作并保证代码可读性的项目。&lt;/li>
+&lt;li>由于 Gorm 提供了丰富的 ORM 功能，适合用在需要与多个表进行复杂交互的项目中，比如电商平台、企业级管理系统等。&lt;/li>
+&lt;/ul>
+&lt;h2 id="我对gorm的使用">我对GORM的使用
+&lt;/h2>&lt;ol>
+&lt;li>安装&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">go get -u gorm.io/gorm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go get -u gorm.io/driver/sqlite
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>文件中导入要使用的包(ps:这里以sqlite为例)&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import (
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;gorm.io/driver/sqlite&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;gorm.io/gorm&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>打开数据库连接&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DB, err := gorm.Open(sqlite.Open(&amp;#34;test.db&amp;#34;), &amp;amp;gorm.Config{})
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if err != nil {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fmt.Println(&amp;#34;连接数据库失败：&amp;#34;, err)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="4">
+&lt;li>迁移&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DB.AutoMigrate(&amp;amp;StudentNew{})
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="5">
+&lt;li>对数据库的操作：&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>查询&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if err := DB.Where(&amp;#34;studentID = ?&amp;#34;, studentID).First(&amp;amp;student).Error; err != nil {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fmt.Println(&amp;#34;查询学生ID失败:&amp;#34;, err)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>插入&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">result := DB.Create(&amp;amp;student)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>删除&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if err := utils.DB.Where(&amp;#34;ksh = ?&amp;#34;, id).Delete(&amp;amp;stu).Error; err != nil {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ctx.JSON(500, gin.H{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;error&amp;#34;: &amp;#34;Failed to delete record&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> })
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>修改&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if err := utils.DB.Model(&amp;amp;user).Where(&amp;#34;ksh = ?&amp;#34;, id).Updates(stu).Error; err != nil {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> c.JSON(500, gin.H{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;error&amp;#34;: &amp;#34;Failed to update record&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> })
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="未完待续">未完待续
+&lt;/h4></description></item></channel></rss>

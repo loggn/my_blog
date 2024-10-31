@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Markdown on 刘龙龙</title><link>https://loggn.vercel.app/categories/markdown/</link><description>Recent content in Markdown on 刘龙龙</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 16 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://loggn.vercel.app/categories/markdown/index.xml" rel="self" type="application/rss+xml"/><item><title>Markdown基础用法</title><link>https://loggn.vercel.app/p/markdown%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link><pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate><guid>https://loggn.vercel.app/p/markdown%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</guid><description>&lt;img src="https://pic.netbian.com/uploads/allimg/241017/235413-17291804539de2.jpg" alt="Featured image of post Markdown基础用法" />&lt;h1 id="markdown-基础用法持续更新中">Markdown 基础用法（持续更新中）
+&lt;/h1>&lt;hr>
+&lt;h2 id="1-标题">1. 标题
+&lt;/h2>&lt;ul>
+&lt;li>使用 # 来表示不同级别的标题：&lt;/li>
+&lt;/ul>
+&lt;h1 id="一级标题">一级标题
+&lt;/h1>&lt;h2 id="二级标题">二级标题
+&lt;/h2>&lt;h3 id="三级标题">三级标题
+&lt;/h3>&lt;h2 id="2-强调加粗斜体">2. 强调（加粗、斜体）
+&lt;/h2>&lt;ul>
+&lt;li>加粗: 使用两个星号 ** 或者两个下划线 __。&lt;/li>
+&lt;li>斜体：使用一个星号 * 或者一个下划线 _。&lt;/li>
+&lt;li>加粗加斜体：三个星号 ***。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>加粗&lt;/strong>&lt;/p>
+&lt;p>&lt;em>斜体&lt;/em>&lt;/p>
+&lt;p>&lt;strong>&lt;em>加粗加斜体&lt;/em>&lt;/strong>&lt;/p>
+&lt;h2 id="3-列表">3. 列表
+&lt;/h2>&lt;ul>
+&lt;li>无序列表：使用 -、* 或者 +。&lt;/li>
+&lt;li>有序列表：使用数字加上句点 1.。&lt;/li>
+&lt;/ul>
+&lt;ul>
+&lt;li>项目 1&lt;/li>
+&lt;li>项目 2
+&lt;ul>
+&lt;li>子项目 1&lt;/li>
+&lt;li>子项目 2&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>第一项&lt;/li>
+&lt;li>第二项&lt;/li>
+&lt;/ol>
+&lt;h2 id="4-链接与图片">4. 链接与图片
+&lt;/h2>&lt;ul>
+&lt;li>链接: &lt;a class="link" href="%e9%93%be%e6%8e%a5%e5%9c%b0%e5%9d%80" >链接文字&lt;/a>。&lt;/li>
+&lt;li>图片: &lt;img src="https://loggn.vercel.app/%e5%9b%be%e7%89%87%e5%9c%b0%e5%9d%80"
+loading="lazy"
+alt="图片描述"
+>。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://www.baidu.com" target="_blank" rel="noopener"
+>百度&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://pss.bdstatic.com/static/superman/img/logo/bd_logo1-66368c33f8.png"
+loading="lazy"
+alt="示例图片"
+>&lt;/p>
+&lt;h2 id="5-引用">5. 引用
+&lt;/h2>&lt;ul>
+&lt;li>使用 &amp;gt; 表示引用。
+&lt;blockquote>
+&lt;p>这是一个引用&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="6-代码">6. 代码
+&lt;/h2>&lt;ul>
+&lt;li>行内代码：使用反引号 `&lt;/li>
+&lt;li>代码块：使用三个反引号&lt;/li>
+&lt;/ul>
+&lt;p>这是 &lt;code>行内代码&lt;/code> 示例。&lt;/p>
+&lt;p>&lt;code>这是一个代码块。&lt;/code>&lt;/p>
+&lt;h2 id="7-分隔线">7. 分隔线
+&lt;/h2>&lt;ul>
+&lt;li>使用三个或以上的 -、* 或 _&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;hr>
+&lt;hr>
+&lt;h2 id="8-表格">8. 表格
+&lt;/h2>&lt;ul>
+&lt;li>使用 | 分隔列，使用 - 分隔表头和内容。&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>表头 1&lt;/th>
+&lt;th>表头 2&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>内容 1&lt;/td>
+&lt;td>内容 2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>内容 3&lt;/td>
+&lt;td>内容 4&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>在 Markdown 表格中，可以通过 &lt;code>&amp;lt;br&amp;gt;&lt;/code> 标签实现单元格内的换行&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>姓名&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>张三&lt;/td>
+&lt;td>学生&lt;br>擅长编程&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>李四&lt;/td>
+&lt;td>老师&lt;br>数学专业&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

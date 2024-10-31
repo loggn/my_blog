@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog on 刘龙龙</title><link>https://loggn.vercel.app/categories/blog/</link><description>Recent content in Blog on 刘龙龙</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 16 Oct 2024 21:03:14 +0800</lastBuildDate><atom:link href="https://loggn.vercel.app/categories/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>通过hugo创建个人博客</title><link>https://loggn.vercel.app/p/%E9%80%9A%E8%BF%87hugo%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link><pubDate>Wed, 16 Oct 2024 21:03:14 +0800</pubDate><guid>https://loggn.vercel.app/p/%E9%80%9A%E8%BF%87hugo%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid><description>&lt;h1 id="通过-hugo-创建个人博客">通过 hugo 创建个人博客
+&lt;/h1>&lt;ul>
+&lt;li>&lt;a class="link" href="https://gohugo.io/" target="_blank" rel="noopener"
+>hugo 官网&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://hugo.opendocs.io/getting-started/" target="_blank" rel="noopener"
+>hugo 中文文档&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="一安装-hugo">一、安装 Hugo
+&lt;/h2>&lt;p>ps: 这里默认已经安装好了 Git、Go等其它工具&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>进入&lt;a class="link" href="https://github.com/gohugoio/hugo/releases/tag/v0.136.0" target="_blank" rel="noopener"
+>hugo 下载链接&lt;/a>中下载压缩包，推荐下载扩展版&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>解压压缩包至自己准备好的文件夹&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>进入该文件夹，并在命令行中输入以下命令来创建一个新的站点&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> .\hugo.exe new site myblog
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="4">
+&lt;li>创建新站点后就可以进入 myblog 文件夹中运行一下 Hugo 开发服务器来测试是否安装成功&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> cd myblog
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ..\hugo.exe server -D
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="二添加内容">二、添加内容
+&lt;/h2>&lt;h3 id="1添加主题">1、添加主题
+&lt;/h3>&lt;h4 id="命令行方式">命令行方式
+&lt;/h4>&lt;ol>
+&lt;li>输入命令添加主题&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>eg：&lt;code>https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke&lt;/code>&lt;/p>
+&lt;ol start="2">
+&lt;li>然后修改 myblog 文件夹中的 config.toml 文件，将主题设置为 ananke&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">theme = &amp;#34;ananke&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="自行下载方式推荐">自行下载方式（推荐）
+&lt;/h4>&lt;ol>
+&lt;li>进入&lt;a class="link" href="https://gohugo.io/" target="_blank" rel="noopener"
+>hugo 官网&lt;/a>，直接点击&lt;strong>Themes&lt;/strong>来选择自己喜欢的主题进行下载&lt;/li>
+&lt;li>将下载好的压缩包放入 myblog/themes 文件夹中并解压&lt;/li>
+&lt;li>将配置文件复制到根目录中，替换根目录中原本的配置文件（具体主题之间会有一定差异）&lt;/li>
+&lt;li>完成后运行查看是否添加成功&lt;/li>
+&lt;/ol>
+&lt;h4 id="一些hugo的命令指令">一些hugo的命令指令
+&lt;/h4>&lt;ul>
+&lt;li>添加新的文章内容&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.\hugo.exe new content
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>eg：&lt;code>.\hugo.exe new content post/通过hugo创建个人博客/通过hugo创建个人博客.md&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>未完待续&lt;/li>
+&lt;/ul></description></item></channel></rss>
