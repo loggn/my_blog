@@ -31,5 +31,6 @@ jobs:
           git pull
           hugo --baseURL http://60.204.240.235
         EOF
+
         
  # cd server/loggn
