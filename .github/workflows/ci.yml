@@ -3,33 +3,33 @@ name: CI
 on:
   push:
     branches:
-      - master  # 监视主分支的推送
+      - master # 监视主分支的推送
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Display Go version
-      run: go version
+      - name: Display Go version
+        run: go version
 
-    - name: Deploy
-      run: |
-        ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
-        ssh -T root@60.204.240.235 << 'EOF'
-          sudo su
-          export PATH=$PATH:/usr/local/go/bin
-          cd /var/www/html/loggn
-          git pull
-          hugo --baseURL http://60.204.240.235
-        EOF
-        
- # cd server/loggn
+      - name: Deploy
+        run: |
+          ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
+          ssh -T root@60.204.240.235 << 'EOF'
+            sudo su
+            export PATH=$PATH:/usr/local/go/bin
+            cd /var/www/html/loggn
+            git pull
+            hugo --baseURL http://60.204.240.235/loggn
+          EOF
+
+  # cd server/loggn
