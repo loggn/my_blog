@@ -21,7 +21,6 @@ jobs:
       - name: Display Go version
         run: go version
 
-<<<<<<< HEAD
       - name: Deploy
         run: |
           ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
@@ -32,20 +31,3 @@ jobs:
             git pull
             hugo --baseURL http://60.204.240.235/loggn
           EOF
-
-  # cd server/loggn
-=======
-    - name: Deploy
-      run: |
-        ssh-keyscan -H 60.204.240.235 >> ~/.ssh/known_hosts
-        ssh -T root@60.204.240.235 << 'EOF'
-          sudo su
-          export PATH=$PATH:/usr/local/go/bin
-          cd /var/www/html/loggn
-          git pull
-          hugo --baseURL http://60.204.240.235
-        EOF
-
-        
- # cd server/loggn
->>>>>>> 24a828f5ff667a14810245cc6788efc5fcaa19eb
